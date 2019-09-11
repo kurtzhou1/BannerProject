@@ -2,13 +2,13 @@
 	'use strict';
 	
 		var ModuleName = 'banner';
-	//設定模組名稱，與HTML相同
+//設定模組名稱，與HTML相同
 		var Module = function ( ele, options ) {
 			this.ele = ele;
 			this.$ele = $(ele);
 			this.option = options;
 		};
-	//設定模組屬性(Moudle為建構函數)
+//設定模組屬性(Moudle為建構函數)，ele、options為參數
 		Module.DEFAULT = {
 			style: 'classname',
 			openAtStart: true,
@@ -17,17 +17,44 @@
 				console.log('whenClickCallback');
 			}
 		};
-		
+//Default，預設參數
 		Module.prototype.init = function(){
 			$('.wrap').append("<p class=" + "btn"+">收合</p>");	
-			console.log('this', this)
+			console.log('this123', this)
+			if (this.option.openAtStart){
+				this.open();
+			}else{
+				this.close();
+			}
 			
+			if (this.option.autoToggle) {
+				if(this.option.openAtStart){
+					// setTimeout(this.close(), 3000);
+					this.close();
+				}else{
+				this.open();
+				}
+			}
 		};
 		Module.prototype.move = function(){
 			$('.btn').click(function(){
-				$('.banner').toggleClass('active');
+				$('.banner').toggleClass('close');
 		})
-		};	
+		};
+
+		Module.prototype.open = function(){
+		
+			setTimeout(() => {
+			$('.banner').removeClass('close');
+			}, 1000);
+		};
+		Module.prototype.close = function(){
+
+			setTimeout(() => {
+			$('.banner').addClass('close');
+			}, 1000);
+		};
+		
 
 		//Default的值
 		Module.prototype.func = function () {
