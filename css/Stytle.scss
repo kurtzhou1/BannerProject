@@ -62,9 +62,12 @@ table {
     overflow: hidden;
     position: relative;
     transition: all 3s;
-}
-.banner{
-    &.active{
-    height: 40px;
-}
+    &.close{
+        height: 40px;
+        transition: all 3s;
+        }
+        &.open{
+            height: 300px;
+            transition: all 3s;
+    }
 }
