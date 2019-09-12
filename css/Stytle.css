@@ -80,10 +80,4 @@ table {
   -webkit-transition: all 3s;
   transition: all 3s;
 }
-
-.banner.open {
-  height: 300px;
-  -webkit-transition: all 3s;
-  transition: all 3s;
-}
 /*# sourceMappingURL=Stytle.css.map */

@@ -20,22 +20,33 @@
 //Default，預設參數
 		Module.prototype.init = function(){
 			$('.wrap').append("<p class=" + "btn"+">收合</p>");	
-			console.log('this123', this)
-			if (this.option.openAtStart){
-				this.open();
-			}else{
-				this.close();
-			}
+			// if (this.option.openAtStart){
+			// 	this.open();
+			// }else{
+			// 	this.close();
+			// }
 			
 			if (this.option.autoToggle) {
 				if(this.option.openAtStart){
-					// setTimeout(this.close(), 3000);
+					this.open();
+					setTimeout(() => {
 					this.close();
+					}, 1000);
 				}else{
-				this.open();
+					this.close();
+					setTimeout(() => {
+					this.open();
+					}, 1000);
+				}
+			}else{
+				if(this.option.openAtStart){
+					this.open();
+				}else{
+					this.close();
 				}
 			}
 		};
+
 		Module.prototype.move = function(){
 			$('.btn').click(function(){
 				$('.banner').toggleClass('close');
@@ -43,28 +54,12 @@
 		};
 
 		Module.prototype.open = function(){
-		
-			setTimeout(() => {
 			$('.banner').removeClass('close');
-			}, 1000);
 		};
 		Module.prototype.close = function(){
-
-			setTimeout(() => {
 			$('.banner').addClass('close');
-			}, 1000);
 		};
 		
-
-		//Default的值
-		Module.prototype.func = function () {
-			console.log('this is a prototype function!!!');
-		};
-	
-		Module.prototype.func1 = function (option) {
-			console.log('this is a prototype function1!!!');
-			console.log(option);
-		};
 	//function區
 		
 		$.fn[ModuleName] = function ( methods, options ) {
