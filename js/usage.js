@@ -20,31 +20,43 @@
 //Default，預設參數
 		Module.prototype.init = function(){
 			$('.wrap').append("<p class=" + "btn"+">收合</p>");	
-			// if (this.option.openAtStart){
-			// 	this.open();
-			// }else{
-			// 	this.close();
-			// }
-			
-			if (this.option.autoToggle) {
+			var Toggle =  typeof(this.option.autoToggle);
+			console.log("this is",Toggle);
+			if(Toggle === 'Boolean' ){
+				alert('wrong');
+				if (this.option.autoToggle) {
+					if(this.option.openAtStart){
+						this.open();
+						setTimeout(() => {
+						this.close();
+						}, 1000);
+					}else{
+						thiss.close();
+						setTimeout(() => {
+						this.open();
+						}, 1000);
+					}
+				}else{
+					if(this.option.openAtStart){
+						this.open();
+					}else{
+						this.close();
+					}
+				}
+			}else if(Toggle === 'number'){
+				var Second = this.option.autoToggle;
 				if(this.option.openAtStart){
 					this.open();
 					setTimeout(() => {
 					this.close();
-					}, 1000);
+					}, Second);
 				}else{
 					this.close();
 					setTimeout(() => {
 					this.open();
-					}, 1000);
+					}, Second);
 				}
-			}else{
-				if(this.option.openAtStart){
-					this.open();
-				}else{
-					this.close();
-				}
-			}
+			}else{alert('ERROR!!!!!');};
 		};
 
 		Module.prototype.move = function(){
