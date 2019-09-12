@@ -28,7 +28,6 @@
 			}
 			
 			if (this.option.autoToggle) {
-				console.log('autoToggle')
 				if(this.option.openAtStart){
 					// setTimeout(this.close(), 3000);
 					this.close();
@@ -50,9 +49,9 @@
 			}, 1000);
 		};
 		Module.prototype.close = function(){
-			console.log('close');
+
 			setTimeout(() => {
-			$('.banner').addClass('close2');
+			$('.banner').addClass('close');
 			}, 1000);
 		};
 		
