@@ -42,6 +42,8 @@ table {
 	border-spacing: 0;
 }
 
+$top-change: 0px;
+
 .btn{
     font-size: 13px;
     position: absolute;
@@ -59,11 +61,24 @@ table {
     margin-left: auto;
     max-width: 1200px;
     height: 300px;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
     transition: all 3s;
-    &.close{
+
+    &.closed{
         height: 40px;
         transition: all 3s;
+        &.opened{
+            height: 300px;
+            transition: all 3s;
         }
+        }
+    &.opened{
+        height: 300px;
+        transition: all 3s;
+        &.closed{
+            height: 40px;
+            transition: all 3s;
+        }
+    }
 }

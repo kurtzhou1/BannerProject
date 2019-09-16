@@ -69,13 +69,31 @@ table {
   margin-left: auto;
   max-width: 1200px;
   height: 300px;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
   -webkit-transition: all 3s;
   transition: all 3s;
 }
 
-.banner.close {
+.banner.closed {
+  height: 40px;
+  -webkit-transition: all 3s;
+  transition: all 3s;
+}
+
+.banner.closed.opened {
+  height: 300px;
+  -webkit-transition: all 3s;
+  transition: all 3s;
+}
+
+.banner.opened {
+  height: 300px;
+  -webkit-transition: all 3s;
+  transition: all 3s;
+}
+
+.banner.opened.closed {
   height: 40px;
   -webkit-transition: all 3s;
   transition: all 3s;

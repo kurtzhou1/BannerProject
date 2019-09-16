@@ -2,6 +2,7 @@
 	'use strict';
 	
 		var ModuleName = 'banner';
+		var GG = $('banner').height();
 //設定模組名稱，與HTML相同
 		var Module = function ( ele, options ) {
 			this.ele = ele;
@@ -22,8 +23,7 @@
 			$('.wrap').append("<p class=" + "btn"+">收合</p>");	
 			var Toggle =  typeof(this.option.autoToggle);
 			console.log("this is",Toggle);
-			if(Toggle === 'Boolean' ){
-				alert('wrong');
+			if(Toggle === 'boolean' ){
 				if (this.option.autoToggle) {
 					if(this.option.openAtStart){
 						this.open();
@@ -31,7 +31,7 @@
 						this.close();
 						}, 1000);
 					}else{
-						thiss.close();
+						this.close();
 						setTimeout(() => {
 						this.open();
 						}, 1000);
@@ -61,16 +61,17 @@
 
 		Module.prototype.move = function(){
 			$('.btn').click(function(){
-				$('.banner').toggleClass('close');
+				$('.banner').toggleClass('closed');
 		})
 		};
 
 		Module.prototype.open = function(){
-			$('.banner').removeClass('close');
+			$('.banner').addClass('opened');
 		};
 		Module.prototype.close = function(){
-			$('.banner').addClass('close');
+			$('.banner').addClass('closed');
 		};
+
 		
 	//function區
 		
