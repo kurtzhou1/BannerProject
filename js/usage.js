@@ -119,9 +119,12 @@
 	Module.prototype.open = function() {
 	  this.$btn.text(this.option.button.closeText);
 	  this.status = 2;
-	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
+	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
 	  $(".banner").addClass("opened");
 	  $(".img").css("top", "0px");
+	//   console.log('OOOOO',this.matchStatusClass(this.status));
+	//   console.log('NNNNN',this.nextStatus(this.status));
+	//   console.log('BBBBB',this.matchStatusClass(this.nextStatus()));
 	};
 	//問問問問問問問問問問問問問問問問問問問問問問問問問問問問
   
@@ -131,6 +134,7 @@
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
 	  $(".banner").addClass("closed");
 	  $(".img").css("top", "-300px");
+
 	};
 	//問問問問問問問問問問問問問問問問問問問問問問問問問問問問
   

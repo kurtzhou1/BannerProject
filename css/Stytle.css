@@ -158,21 +158,33 @@ table {
 
 .banner.closed {
   height: 40px;
-  -webkit-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
 }
 
 .banner.opened {
   height: 300px;
-  -webkit-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.banner.closing {
+  height: 170px;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.banner.opening {
+  height: 170px;
+  -webkit-transition: all 1s;
+  transition: all 1s;
 }
 
 .img {
   position: relative;
   -webkit-transform: rotateY(-300px);
           transform: rotateY(-300px);
-  -webkit-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
 }
 /*# sourceMappingURL=Stytle.css.map */

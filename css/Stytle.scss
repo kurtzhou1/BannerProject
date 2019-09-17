@@ -145,16 +145,24 @@ table {
   overflow: hidden;
   &.closed {
     height: 40px;
-    transition: all 2s;
+    transition: all 1s;
   }
   &.opened {
     height: 300px;
-    transition: all 2s;
+    transition: all 1s;
+  }
+  &.closing {
+    height: 170px;
+    transition: all 1s;
+  }
+  &.opening {
+    height: 170px;
+    transition: all 1s;
   }
 }
 
 .img {
   position: relative;
   transform: rotateY(-300px);
-  transition: all 2s;
+  transition: all 1s;
 }
