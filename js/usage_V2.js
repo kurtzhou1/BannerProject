@@ -58,11 +58,9 @@
 		  }
 		} else {
 		  if (this.option.openAtStart) {
-			this.Topen();
-			console.log('AAAAA',this.status);
+			this.open();
 		  } else {
-			this.Tclose();
-			console.log('BBBBB',this.status);
+			this.close();
 		  }
 		}
 	  } else if (Toggle === "number") {
@@ -103,10 +101,8 @@
 			} else {
 			  if (this.option.openAtStart) {
 				this.Topen();
-				this.status = 2;
 			  } else {
 				this.Tclose();
-				this.status = 0;
 			  }
 			}
 		  } else if (Toggle === "number") {
@@ -180,39 +176,40 @@
 	  });
 	};
 
-	// Module.prototype.toggle = function(){
+	Module.prototype.toggle = function(){
 
-	// 	if (!this.option.transition) {		
-	// 		var T2 = 0;
-	// 	  }else{
-	// 		var T2 = 1000;			
-	// 	}
-	// 	if (this.status === 2 || this.status ===  3) {
-	// 		setTimeout(() => {
-	// 			this.Tclose();
-	// 			this.clean();
-	// 			$('.banner').addClass('closing');
-	// 			}, 0);
+		if (!this.option.transition) {		
+			var T2 = 0;
+		  }else{
+			var T2 = 1000;			
+		}
+		if (this.status === 2 || this.status ===  3) {
+			setTimeout(() => {
+				this.Tclose();
+				this.clean();
+				$('.banner').addClass('closing');
+				}, 0);
 				
-	// 			setTimeout(() => {
-	// 				this.clean();
-	// 			$('.banner').addClass('closed');
-	// 			this.status = 0;
-	// 			}, T2);
-	// 	} else if (this.status === 0 || this.status === 1) {
-	// 		setTimeout(() => {
-	// 			this.Topen();
-	// 			this.clean();
-	// 			$('.banner').addClass('opening');
-	// 			}, 0);
+				setTimeout(() => {
+					this.clean();
+				$('.banner').addClass('closed');
+				this.status = 0;
+				}, T2);
+		} else if (this.status === 0 || this.status === 1) {
+			setTimeout(() => {
+				this.Topen();
+				this.clean();
+				$('.banner').addClass('opening');
+				}, 0);
 	
-	// 			setTimeout(() => {
-	// 			this.clean();
-	// 			$('.banner').addClass('opened');
-	// 			this.status = 2;
-	// 			}, T2);
-	// 	}
-	// };
+				setTimeout(() => {
+				this.clean();
+				$('.banner').addClass('opened');
+				this.status = 2;
+				}, T2);
+		}
+
+	};
 
 	Module.prototype.clearTimer = function () {
 		clearInterval(this.timer);
@@ -237,14 +234,12 @@
 	Module.prototype.Topen = function() {
 		this.$btn.text(this.option.button.closeText);
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
-		this.status = 2;
 		$(".banner").addClass("opened");
 	};
   
 	Module.prototype.Tclose = function() {
 		this.$btn.text(this.option.button.openText);
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
-		this.status = 0;
 		$(".banner").addClass("closed");
 	};
 
@@ -329,7 +324,7 @@
 		  // if(module.option.autoToggle){
 		  module.move();
 		  module.transitionEnd();
-		  //module.toggle();
+		  module.toggle();
 		  // }
 		}
 	  });
