@@ -129,12 +129,17 @@
 	Module.prototype.move = function() {
 	  var self = this;
 	  $(".btn").click(function() {
-		if (!self.option.transition) {
+		  console.log('status', self.status)
+		if (!self.option.transition) {		
 			var T2 = 0;
 		  }else{
 			var T2 = 1000;
-		  }
-		if (self.status === 2) {
+			var timer2 = setInterval(function() {
+				self.option.whenClickCallback()
+			}, 100)
+			
+		}
+		if (self.status === 2 || self.status ===  3) {
 			setTimeout(() => {
 				self.Tclose();
 				self.clean();
@@ -146,9 +151,9 @@
 				$('.banner').addClass('closed');
 				self.status = 0;
 				}, T2);
-		  console.log('456',self.status);
-		} else if (self.status === 0) {
+		} else if (self.status === 0 || self.status === 1) {
 			setTimeout(() => {
+				self.Topen();
 				self.clean();
 				$('.banner').addClass('opening');
 				}, 0);
@@ -158,8 +163,16 @@
 				$('.banner').addClass('opened');
 				self.status = 2;
 				}, T2);
-
 		}
+		// if (self.option.transition){
+		// 	if(self.status === 0 || self.status === 2){
+		// 		alert('123')
+		// 		clearInterval(timer2);
+		// 		// alert()
+		// }
+
+		// }
+
 	  });
 	};
   
@@ -176,19 +189,24 @@
 	//     this.timer = setInterval(this.option.whenTransition, 25);
 	//   };
 
+	Module.prototype.clearTimer = function () {
+		clearInterval(this.timer);
+		clearTimeout(this.timer);
+	};
 
 	Module.prototype.open = function() {
+		// alert('open')
 		this.$btn.text(this.option.button.closeText);
 		this.status = 3;
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
-		$(".banner").addClass("opened");
+		$(".banner").removeClass("closed").addClass("opened");
 	};
   
 	Module.prototype.close = function() {
 		this.$btn.text(this.option.button.openText);
 		this.status = 1;
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
-		$(".banner").addClass("closed");
+		$(".banner").removeClass("opened").addClass("closed");
 	};
 
 	Module.prototype.Topen = function() {
@@ -258,9 +276,9 @@
 	//   Module.prototype.matchStatusClass = function(status) {
 	//     return this.option.class[this.statusCycle[status]];
 	//   };
-  
 	//function區
-	$.fn[ModuleName] = function(methods, options) {
+
+	$.fn[ModuleName] = function(options) {
 	  console.log("this in FN", this);
 	  return this.each(function() {
 		//.fn[ModuleName] 等同於 .fn.ModuleName
@@ -270,13 +288,10 @@
 		var opts = null;
 		if (!!module) {
 		  console.log("!!module");
-		  if (typeof options === "string" && typeof options2 === "undefined") {
+		  console.log("typeof options", typeof options)
+		//   if (typeof options === "string" && typeof options2 === "undefined") {
+		  if (typeof options === "string") {
 			module[options]();
-		  } else if (
-			typeof options === "string" &&
-			typeof options2 === "object"
-		  ) {
-			module[options](options2);
 		  } else {
 			console.log("unsupported options!");
 			throw "unsupported options!";
@@ -286,7 +301,7 @@
 		  opts = $.extend(
 			{},
 			Module.DEFAULT,
-			typeof methods === "object" && methods,
+			// typeof methods === "object" && methods,
 			typeof options === "object" && options
 		  );
 		  // Object.assign

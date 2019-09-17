@@ -141,28 +141,28 @@ table {
   max-width: 1200px;
   height: 300px;
   position: relative;
-  transition: all 2s;
+  // transition: all 1.5s;
   overflow: hidden;
   &.closed {
     height: 40px;
-    transition: all 1s;
+    transition: all 3s;
   }
   &.opened {
     height: 300px;
-    transition: all 1s;
+    transition: all 3s;
   }
   &.closing {
     height: 40px;
-    transition: all 1s;
+    transition: all 3s;
   }
   &.opening {
     height: 300px;
-    transition: all 1s;
+    transition: all 3s;
   }
 }
 
 .closed .img{
   position: relative;
-  transition: all 0.3s;
+  transition: all 3s;
   transform: translateY(-300px);
 }
