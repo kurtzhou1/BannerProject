@@ -129,13 +129,36 @@
 	Module.prototype.move = function() {
 	  var self = this;
 	  $(".btn").click(function() {
-		self.clean();
+		if (!self.option.transition) {
+			var T2 = 0;
+		  }else{
+			var T2 = 1000;
+		  }
 		if (self.status === 2) {
-		  self.close();
-		  console.log(self.status);
+			setTimeout(() => {
+				self.Tclose();
+				self.clean();
+				$('.banner').addClass('closing');
+				}, 0);
+				
+				setTimeout(() => {
+				self.clean();
+				$('.banner').addClass('closed');
+				self.status = 0;
+				}, T2);
+		  console.log('456',self.status);
 		} else if (self.status === 0) {
-		  self.open();
-		  console.log(self.status);
+			setTimeout(() => {
+				self.clean();
+				$('.banner').addClass('opening');
+				}, 0);
+	
+				setTimeout(() => {
+				self.clean();
+				$('.banner').addClass('opened');
+				self.status = 2;
+				}, T2);
+
 		}
 	  });
 	};
@@ -159,7 +182,6 @@
 		this.status = 3;
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
 		$(".banner").addClass("opened");
-		$(".img").css("top", "0px");
 	};
   
 	Module.prototype.close = function() {
@@ -167,21 +189,18 @@
 		this.status = 1;
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
 		$(".banner").addClass("closed");
-		$(".img").css("top", "-300px");
 	};
 
 	Module.prototype.Topen = function() {
 		this.$btn.text(this.option.button.closeText);
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
 		$(".banner").addClass("opened");
-		$(".img").css("top", "0px");
 	};
   
 	Module.prototype.Tclose = function() {
 		this.$btn.text(this.option.button.openText);
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
 		$(".banner").addClass("closed");
-		$(".img").css("top", "-300px");
 	};
 
   
