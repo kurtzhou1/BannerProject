@@ -126,8 +126,8 @@ table {
 .btn {
   font-size: 13px;
   position: absolute;
-  bottom: 0px;
   right: 0px;
+  bottom: 0px;
   background-color: black;
   color: #a3a3a3;
   padding: 4px 4px 4px 10px;
@@ -141,26 +141,24 @@ table {
   max-width: 1200px;
   height: 300px;
   position: relative;
-  transition: all 2s;
-  overflow: hidden;
+  transition: all 3s;
   &.closed {
     height: 40px;
-    transition: all 1s;
+    transition: all 1.5s;
   }
   &.opened {
     height: 300px;
-    transition: all 1s;
+    transition: all 1.5s;
   }
   &.closing {
-    height: 170px;
-    transition: all 1s;
+    height: 40px;
+    transition: all 1.5s;
   }
   &.opening {
-    height: 170px;
-    transition: all 1s;
+    height: 300px;
+    transition: all 1.5s;
   }
 }
-
 .img {
   position: relative;
   transform: rotateY(-300px);

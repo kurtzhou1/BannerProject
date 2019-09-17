@@ -40,6 +40,7 @@
 	Module.prototype.init = function() {
 	  $(".wrap").append(this.$btn);
 	  var Toggle = typeof this.option.autoToggle;
+	if(this.option.transition){
 	  if (Toggle === "boolean") {
 		if (this.option.autoToggle) {
 		  if (this.option.openAtStart) {
@@ -65,13 +66,13 @@
 	  } else if (Toggle === "number") {
 		var Second = this.option.autoToggle;
 		if (this.option.openAtStart) {
-		  this.open();
+		  this.Topen();
 		  setTimeout(() => {
 			this.clean();
 			this.close();
 		  }, Second);
 		} else {
-		  this.close();
+		  this.Tclose();
 		  setTimeout(() => {
 			this.clean();
 			this.open();
@@ -80,20 +81,61 @@
 	  } else {
 		alert("ERROR!!!!!");
 	  }
-  
-	  if (!this.option.transition) {
+	}else{
 		this.nomove();
-	  }
-	};
-  
+		if (Toggle === "boolean") {
+			if (this.option.autoToggle) {
+			  if (this.option.openAtStart) {
+				this.Topen();
+				setTimeout(() => {
+				  this.clean();
+				  this.Tclose();
+				}, 1000);
+			  } else {
+				this.Tclose();
+				setTimeout(() => {
+				  this.clean();
+				  this.Topen();
+				}, 1000);
+			  }
+			} else {
+			  if (this.option.openAtStart) {
+				this.Topen();
+			  } else {
+				this.Tclose();
+			  }
+			}
+		  } else if (Toggle === "number") {
+			var Second = this.option.autoToggle;
+			if (this.option.openAtStart) {
+			  this.Topen();
+			  setTimeout(() => {
+				this.clean();
+				this.Tclose();
+			  }, Second);
+			} else {
+			  this.Tclose();
+			  setTimeout(() => {
+				this.clean();
+				this.Topen();
+			  }, Second);
+			}
+		  } else {
+			alert("ERROR!!!!!");
+		  }
+		}
+	}
+
 	Module.prototype.move = function() {
 	  var self = this;
 	  $(".btn").click(function() {
 		self.clean();
 		if (self.status === 2) {
 		  self.close();
+		  console.log(self.status);
 		} else if (self.status === 0) {
 		  self.open();
+		  console.log(self.status);
 		}
 	  });
 	};
@@ -110,77 +152,89 @@
 	//     }
 	//     this.timer = setInterval(this.option.whenTransition, 25);
 	//   };
-	// Module.prototype.open = function(){
-	// 	$('.banner').addClass('opened');
-	// };
-	// Module.prototype.close = function(){
-	// 	$('.banner').addClass('closed');
-	// };
+
+
 	Module.prototype.open = function() {
-	  this.$btn.text(this.option.button.closeText);
-	  this.status = 2;
+		this.$btn.text(this.option.button.closeText);
+		this.status = 3;
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
-	  $(".banner").addClass("opened");
-	  $(".img").css("top", "0px");
-	//   console.log('OOOOO',this.matchStatusClass(this.status));
-	//   console.log('NNNNN',this.nextStatus(this.status));
-	//   console.log('BBBBB',this.matchStatusClass(this.nextStatus()));
+		$(".banner").addClass("opened");
+		$(".img").css("top", "0px");
 	};
-	//問問問問問問問問問問問問問問問問問問問問問問問問問問問問
   
 	Module.prototype.close = function() {
-	  this.$btn.text(this.option.button.openText);
-	  this.status = 0;
+		this.$btn.text(this.option.button.openText);
+		this.status = 1;
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
-	  $(".banner").addClass("closed");
-	  $(".img").css("top", "-300px");
-
+		$(".banner").addClass("closed");
+		$(".img").css("top", "-300px");
 	};
-	//問問問問問問問問問問問問問問問問問問問問問問問問問問問問
+
+	Module.prototype.Topen = function() {
+		this.$btn.text(this.option.button.closeText);
+	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
+		$(".banner").addClass("opened");
+		$(".img").css("top", "0px");
+	};
+  
+	Module.prototype.Tclose = function() {
+		this.$btn.text(this.option.button.openText);
+	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
+		$(".banner").addClass("closed");
+		$(".img").css("top", "-300px");
+	};
+
   
 	Module.prototype.clean = function() {
-	  $(".banner").removeClass("opened closed");
+	  $(".banner").removeClass("opened closed opening closing");
 	};
 	Module.prototype.nomove = function() {
 	  $(".banner").css("transition", "all 0s");
+	  $(".img").css("transition", "all 0s");
 	};
   
-	Module.prototype.addTransition = function() {
-	  if (this.option.transition && !this.$ele.hasClass("transition")) {
-		this.$ele.addClass("transition");
-	  }
-	};
+	// Module.prototype.addTransition = function() {
+	//   if (this.option.transition && !this.$ele.hasClass("transition")) {
+	// 	this.$ele.addClass("transition");
+	//   }
+	// };
 
-	Module.prototype.nextStatus = function () {
-		this.status++;
-		if (this.status > this.statusCycle.length - 1) {
+
+  
+	Module.prototype.transitionEnd = function () {
+		if (!this.option.transition) {
+			var T1 = 0;
+			var T2 = 0;
+		  }else{
+			var T1 = 1000;
+			var T2 = 1200;
+		  }
+		
+		if (this.status === 1 ){
+			setTimeout(() => {
+			this.clean();
+			$('.banner').addClass('opening');
+			}, T1);
+
+			setTimeout(() => {
+			this.clean();
+			$('.banner').addClass('opened');
+			this.status = 2;
+			}, T2);
+		} else if
+		 (this.status === 3){
+			setTimeout(() => {
+			this.clean();
+			$('.banner').addClass('closing');
+			}, T1);
+			
+			setTimeout(() => {
+			this.clean();
+			$('.banner').addClass('closed');
 			this.status = 0;
+			}, T2);
 		}
-		return this.status;
 	};
-
-	Module.prototype.matchStatusClass = function (status) {
-		return this.option.class[this.statusCycle[status]];
-		console.log('aaaaa',this.status)
-	};
-  
-	//   Module.prototype.transitionEnd = function() {
-	//     if (this.status === 1) {
-	//       this.$ele
-	//         .removeClass(this.matchStatusClass(this.status))
-	//         .addClass(this.matchStatusClass(this.nextStatus()));
-	//     } else if (this.status === 3) {
-	//       this.$ele
-	//         .removeClass(this.matchStatusClass(this.status))
-	//         .addClass(this.matchStatusClass(this.nextStatus()));
-	//     }
-	//     this.clearTimer();
-	//   };
-	//   Module.prototype.clearTimer = function() {
-	//     clearInterval(this.timer);
-	//     clearTimeout(this.timer);
-	//   };
-
   
 	//   Module.prototype.matchStatusClass = function(status) {
 	//     return this.option.class[this.statusCycle[status]];
@@ -225,6 +279,7 @@
 		  //module.move();
 		  // if(module.option.autoToggle){
 		  module.move();
+		  module.transitionEnd();
 		  // }
 		}
 	  });
