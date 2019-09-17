@@ -117,19 +117,18 @@
 	// 	$('.banner').addClass('closed');
 	// };
 	Module.prototype.open = function() {
-	  // this.$ele.removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
 	  this.$btn.text(this.option.button.closeText);
 	  this.status = 2;
+	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
 	  $(".banner").addClass("opened");
 	  $(".img").css("top", "0px");
 	};
 	//問問問問問問問問問問問問問問問問問問問問問問問問問問問問
   
 	Module.prototype.close = function() {
-	  // this.$ele.removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
-  
 	  this.$btn.text(this.option.button.openText);
 	  this.status = 0;
+	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
 	  $(".banner").addClass("closed");
 	  $(".img").css("top", "-300px");
 	};
@@ -146,6 +145,19 @@
 	  if (this.option.transition && !this.$ele.hasClass("transition")) {
 		this.$ele.addClass("transition");
 	  }
+	};
+
+	Module.prototype.nextStatus = function () {
+		this.status++;
+		if (this.status > this.statusCycle.length - 1) {
+			this.status = 0;
+		}
+		return this.status;
+	};
+
+	Module.prototype.matchStatusClass = function (status) {
+		return this.option.class[this.statusCycle[status]];
+		console.log('aaaaa',this.status)
 	};
   
 	//   Module.prototype.transitionEnd = function() {
@@ -164,16 +176,7 @@
 	//     clearInterval(this.timer);
 	//     clearTimeout(this.timer);
 	//   };
-  
-	//   Module.prototype.nextStatus = function() {
-	//     this.status++;
-	//     if (this.status > this.statusCycle.length - 1) {
-	//       this.status = 0;
-	//       console.log("CCCCCC", this.status);
-	//     }
-	//     return this.status;
-	//     console.log("DDDDDD", this.status);
-	//   };
+
   
 	//   Module.prototype.matchStatusClass = function(status) {
 	//     return this.option.class[this.statusCycle[status]];
@@ -225,15 +228,4 @@
   })(jQuery);
   
   //需要init
-  
-  // whenTransition: function whenTransition() {
-  // 	console.log('whenTransition');
-  // 	var $inputDestination = $('input[data-toggle=dtm-lnls][data-target=' + $('.dtm-lnls.show').attr('data-id') + ']');
-  // 	if ($inputDestination.length > 0 && $inputDestination.data('dtm_lnls').$target.filter('.show').length > 0) {
-  // 		$inputDestination.dtm_lnls('setPosition', $inputDestination.data('dtm_lnls').$target.filter('.show'));
-  // 	}
-  // }
-  
-  // this.$btn.text(this.option.button.closeText);
-  // this.$btn.text(this.option.button.openText);
   
