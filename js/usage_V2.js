@@ -58,9 +58,11 @@
 		  }
 		} else {
 		  if (this.option.openAtStart) {
-			this.open();
+			this.Topen();
+			console.log('AAAAA',this.status);
 		  } else {
-			this.close();
+			this.Tclose();
+			console.log('BBBBB',this.status);
 		  }
 		}
 	  } else if (Toggle === "number") {
@@ -101,8 +103,10 @@
 			} else {
 			  if (this.option.openAtStart) {
 				this.Topen();
+				this.status = 2;
 			  } else {
 				this.Tclose();
+				this.status = 0;
 			  }
 			}
 		  } else if (Toggle === "number") {
@@ -208,7 +212,6 @@
 				this.status = 2;
 				}, T2);
 		}
-
 	};
 
 	Module.prototype.clearTimer = function () {
@@ -234,12 +237,14 @@
 	Module.prototype.Topen = function() {
 		this.$btn.text(this.option.button.closeText);
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass(this.nextStatus()));
+		this.status = 2;
 		$(".banner").addClass("opened");
 	};
   
 	Module.prototype.Tclose = function() {
 		this.$btn.text(this.option.button.openText);
 	//   $(".banner").removeClass(this.matchStatusClass(this.status)).addClass(this.matchStatusClass());
+		this.status = 0;
 		$(".banner").addClass("closed");
 	};
 
@@ -324,7 +329,7 @@
 		  // if(module.option.autoToggle){
 		  module.move();
 		  module.transitionEnd();
-		  module.toggle();
+		  //module.toggle();
 		  // }
 		}
 	  });

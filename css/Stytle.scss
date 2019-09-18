@@ -144,25 +144,25 @@ table {
   // transition: all 1.5s;
   overflow: hidden;
   &.closed {
-    height: 40px;
-    transition: all 3s;
+    height: 80px;
+    transition: all 1.5s;
   }
   &.opened {
     height: 300px;
-    transition: all 3s;
+    transition: all 1.5s;
   }
   &.closing {
-    height: 40px;
-    transition: all 3s;
+    height: 80px;
+    transition: all 1.5s;
   }
   &.opening {
     height: 300px;
-    transition: all 3s;
+    transition: all 1.5s;
   }
 }
 
 .closed .img{
   position: relative;
-  transition: all 3s;
+  transition: all 0.05s;
   transform: translateY(-300px);
 }

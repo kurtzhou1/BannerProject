@@ -138,10 +138,13 @@
 			var T2 = 0;
 		  }else{
 			var T2 = 1000;
-			var timer2 = setInterval(function() {
-				self.option.whenClickCallback()
-			}, 100)
-			
+			var timesRun = 0;
+			var interval = setInterval(function(){
+			timesRun += 1;
+			self.option.whenClickCallback()
+			if(timesRun === 30){
+			clearInterval(interval);
+			}}, 50);
 		}
 		if (self.status === 2 || self.status ===  3) {
 			setTimeout(() => {
@@ -167,52 +170,51 @@
 				$('.banner').addClass('opened');
 				self.status = 2;
 				}, T2);
-		}
-		// if (self.option.transition){
-		// 	if(self.status === 0 || self.status === 2){
-		// 		alert('123')
+				}
+			
+		// 	if(self.status === 0 && self.status === 3){
+		// 		alert('13');
 		// 		clearInterval(timer2);
 		// 		// alert()
 		// }
-
 		// }
 
 	  });
 	};
 
-	// Module.prototype.toggle = function(){
+	Module.prototype.toggle = function(){
 
-	// 	if (!this.option.transition) {		
-	// 		var T2 = 0;
-	// 	  }else{
-	// 		var T2 = 1000;			
-	// 	}
-	// 	if (this.status === 2 || this.status ===  3) {
-	// 		setTimeout(() => {
-	// 			this.Tclose();
-	// 			this.clean();
-	// 			$('.banner').addClass('closing');
-	// 			}, 0);
+		if (!this.option.transition) {		
+			var T2 = 0;
+		  }else{
+			var T2 = 1000;			
+		}
+		if (this.status === 2 || this.status ===  3) {
+			setTimeout(() => {
+				this.Tclose();
+				this.clean();
+				$('.banner').addClass('closing');
+				}, 0);
 				
-	// 			setTimeout(() => {
-	// 				this.clean();
-	// 			$('.banner').addClass('closed');
-	// 			this.status = 0;
-	// 			}, T2);
-	// 	} else if (this.status === 0 || this.status === 1) {
-	// 		setTimeout(() => {
-	// 			this.Topen();
-	// 			this.clean();
-	// 			$('.banner').addClass('opening');
-	// 			}, 0);
+				setTimeout(() => {
+					this.clean();
+				$('.banner').addClass('closed');
+				this.status = 0;
+				}, T2);
+		} else if (this.status === 0 || this.status === 1) {
+			setTimeout(() => {
+				this.Topen();
+				this.clean();
+				$('.banner').addClass('opening');
+				}, 0);
 	
-	// 			setTimeout(() => {
-	// 			this.clean();
-	// 			$('.banner').addClass('opened');
-	// 			this.status = 2;
-	// 			}, T2);
-	// 	}
-	// };
+				setTimeout(() => {
+				this.clean();
+				$('.banner').addClass('opened');
+				this.status = 2;
+				}, T2);
+		}
+	};
 
 	Module.prototype.clearTimer = function () {
 		clearInterval(this.timer);
