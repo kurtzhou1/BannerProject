@@ -59,10 +59,8 @@
 		} else {
 		  if (this.option.openAtStart) {
 			this.Topen();
-			console.log('AAAAA',this.status);
 		  } else {
 			this.Tclose();
-			console.log('BBBBB',this.status);
 		  }
 		}
 	  } else if (Toggle === "number") {
@@ -137,7 +135,7 @@
 		if (!self.option.transition) {		
 			var T2 = 0;
 		  }else{
-			var T2 = 1000;
+			var T2 = 1300;
 			var timesRun = 0;
 			var interval = setInterval(function(){
 			timesRun += 1;
@@ -158,6 +156,7 @@
 				$('.banner').addClass('closed');
 				self.status = 0;
 				}, T2);
+
 		} else if (self.status === 0 || self.status === 1) {
 			setTimeout(() => {
 				self.Topen();
@@ -187,7 +186,7 @@
 		if (!this.option.transition) {		
 			var T2 = 0;
 		  }else{
-			var T2 = 1000;			
+			var T2 = 1300;			
 		}
 		if (this.status === 2 || this.status ===  3) {
 			setTimeout(() => {
@@ -201,6 +200,7 @@
 				$('.banner').addClass('closed');
 				this.status = 0;
 				}, T2);
+
 		} else if (this.status === 0 || this.status === 1) {
 			setTimeout(() => {
 				this.Topen();
@@ -265,7 +265,7 @@
 			var T2 = 0;
 		  }else{
 			var T1 = 1000;
-			var T2 = 1200;
+			var T2 = 2500;
 		  }
 		
 		if (this.status === 1 ){

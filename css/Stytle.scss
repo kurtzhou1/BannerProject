@@ -161,8 +161,10 @@ table {
   }
 }
 
+
+
 .closed .img{
-  position: relative;
-  transition: all 0.05s;
+  position: absolute;
+  transition: all 0s;
   transform: translateY(-300px);
 }

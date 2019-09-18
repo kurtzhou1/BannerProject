@@ -179,9 +179,9 @@ table {
 }
 
 .closed .img {
-  position: relative;
-  -webkit-transition: all 0.05s;
-  transition: all 0.05s;
+  position: absolute;
+  -webkit-transition: all 0s;
+  transition: all 0s;
   -webkit-transform: translateY(-300px);
           transform: translateY(-300px);
 }
